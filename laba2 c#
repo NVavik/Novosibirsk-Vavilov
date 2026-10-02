@@ -1,0 +1,210 @@
+using System.Diagnostics;
+using System.Globalization;
+
+namespace laba2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Задание 1");
+            int n = int.Parse(Console.ReadLine());
+            int[] nums = new int[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                nums[i] = int.Parse(Console.ReadLine());
+            }
+
+            for (int i = 0; i < nums.Length / 2; i++)
+            {
+                int temp = nums[i];
+                nums[i] = nums[nums.Length - 1 - i];
+                nums[nums.Length - 1 - i] = temp;
+            }
+            Console.WriteLine("|" + string.Join("|", nums) + "|");
+
+            Console.WriteLine("Задание 2");
+            int m = int.Parse(Console.ReadLine());
+            int nn = int.Parse(Console.ReadLine());
+            int[,] mas2D = new int[m, nn];
+            int num = 1;
+            for (int i = 0; i < m; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    for (int j = 0; j < nn; j++)
+                    {
+                        mas2D[i, j] = num;
+                        num++;
+                    }
+                }
+                else
+                {
+                    for (int j = nn - 1; j >= 0; j--)
+                    {
+                        mas2D[i, j] = num;
+                        num++;
+                    }
+                }
+            }
+            Console.WriteLine("Матрица:");
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < nn; j++)
+                {
+                    Console.Write(mas2D[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("Задание 3");
+            int m3 = int.Parse(Console.ReadLine());
+            int n3 = int.Parse(Console.ReadLine());
+            int nodnmer = n3 * m3;
+            int[,] mas2 = new int[m3, n3];
+            int[] arr = new int[nodnmer];
+            for (int i = 0; i < nodnmer; i++)
+            {
+                arr[i] = int.Parse(Console.ReadLine());
+            }
+            for (int i = 0; i < m3; i++)
+            {
+                for (int j = 0; j < n3; j++)
+                {
+                    mas2[i, j] = arr[i * n3 + j];
+                }
+            }
+            Console.WriteLine("Матрица:");
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < nn; j++)
+                {
+                    Console.Write(mas2[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("Задание 4");
+            int m4 = int.Parse(Console.ReadLine());
+            int n4 = int.Parse(Console.ReadLine());
+            var rand = new Random(1);
+            int[,] m2d = new int[m4, n4];
+            for (int i = 0; i < m4; i++)
+            {
+                for (int j = 0; j < n4; j++)
+                {
+                    m2d[i, j] = rand.Next();
+                }
+            }
+            int minn = m2d[0, 0];
+            int maxx = m2d[0, 0];
+            for (int i = 0; i < m4; i++)
+            {
+                for (int j = 0; j < n4; j++)
+                {   
+                    if (m2d[i, j] < minn)
+                    {
+                        minn = m2d[i, j];
+                    }
+                    if (m2d[i, j] >= maxx)
+                    {
+                        maxx = m2d[i, j];
+                    }
+                }
+            }
+            Console.WriteLine("MIN: = " + minn + ", " + "MAX = " + maxx);
+
+            Console.WriteLine("Задание 5: введи строку");
+            string text = Console.ReadLine();
+            char[] array = new char[text.Length];
+            int cnt = 0;
+            foreach (char c in text) {
+                bool found = false;
+                for (int i = 0; i < cnt; i++)
+                {
+                    if (array[i] == c)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    array[cnt] = c;
+                    cnt++;
+                }
+            }
+            Console.WriteLine("Symbols = " + cnt);
+
+            Console.WriteLine("Задание 6");
+            string txt = Console.ReadLine();
+            Dictionary<char, int> dic = new Dictionary<char, int>();
+            foreach (char c in txt)
+            {
+                if (c == ' ')
+                {
+                    continue;
+                }
+                char toUp = char.ToUpper(c);
+                if (dic.TryGetValue(toUp, out int count))
+                {
+                    dic[toUp] = count + 1;
+                }
+                else
+                {
+                    dic[toUp] = 1;
+                }
+            }
+            foreach (var para in dic)
+            {
+                Console.WriteLine($"{para.Key} = {para.Value},");
+            }
+
+            Console.WriteLine("Задание 7");
+            string mess = Console.ReadLine();
+            string toDel = Console.ReadLine();
+            string stroka = "";
+            foreach (char c in mess)
+            {
+                if (c != toDel[0])
+                {
+                    stroka += c;
+                }
+            }
+            Console.WriteLine(stroka);
+
+            Console.WriteLine("Задание 8");
+            int N = int.Parse(Console.ReadLine());
+            int[,] m2sd = new int[N, N];
+            int nom = 1;
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0;j < N; j++)
+                {
+                    m2sd[i, j] = nom;
+                    nom++;
+                }
+            }
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            int sum1 = 0, sum2 = 0;
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    sum1 = nom;
+                }
+            }
+            sw.Stop();
+            Console.WriteLine($"Время: {sw.ElapsedMilliseconds} мс, Сумма: {sum1}");
+            sw.Restart();
+            for (int j = 0; j < N; j++)
+            {
+                for (int i = 0; i < N; i++)
+                {
+                    sum2 = nom;
+                }
+            }
+            Console.WriteLine($"Время: {sw.ElapsedMilliseconds} мс, Сумма: {sum2}");
+        }
+    }
+}
